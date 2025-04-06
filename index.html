@@ -1,0 +1,238 @@
+                <!-- H A C K A T H O N 
+                  P R O J E C T -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceX - Financial Advisory</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script> window.chtlConfig = { chatbotId: "7418453787" } </script>
+<script async data-id="7418453787" id="chatling-embed-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i data-lucide="dollar-sign" class="brand-icon"></i>
+            <span>FinanceX</span>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+            <button class="nav-btn" data-tab="expenses">Expense Tracker</button>
+            <button class="nav-btn" data-tab="advice">Financial Advice</button>
+            <button class="nav-btn" data-tab="investments">Investments</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <h1>Financial Dashboard</h1>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div>
+                        <p class="stat-label">Monthly Income</p>
+                        <p class="stat-value" id="income-display">$0</p>
+                    </div>
+                    <i data-lucide="dollar-sign" class="stat-icon income"></i>
+                </div>
+                <div class="stat-card">
+                    <div>
+                        <p class="stat-label">Total Expenses</p>
+                        <p class="stat-value" id="expenses-display">$0</p>
+                    </div>
+                    <i data-lucide="pie-chart" class="stat-icon expenses"></i>
+                </div>
+                <div class="stat-card">
+                    <div>
+                        <p class="stat-label">Savings Rate</p>
+                        <p class="stat-value" id="savings-rate-display">0%</p>
+                    </div>
+                    <i data-lucide="trending-up" class="stat-icon savings"></i>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="actions-grid">
+                    <button class="action-btn" onclick="switchTab('expenses')">
+                        <span>Track New Expense</span>
+                        <i data-lucide="arrow-up-right"></i>
+                    </button>
+                    <button class="action-btn" onclick="switchTab('expenses')">
+                        <span>Update Income</span>
+                        <i data-lucide="arrow-up-right"></i>
+                    </button>
+                    <button class="action-btn" onclick="switchTab('investments')">
+                        <span>View Investment Tips</span>
+                        <i data-lucide="arrow-up-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expense Tracker Section -->
+        <section id="expenses" class="section">
+            <h1>Expense Tracker</h1>
+            <div class="card">
+                <h2>Update Monthly Income</h2>
+                <div class="input-group">
+                    <input type="number" id="income-input" placeholder="Enter your monthly income">
+                    <button onclick="updateIncome()" class="btn primary">
+                        <i data-lucide="save"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Add New Expense</h2>
+                <div class="input-group">
+                    <input type="number" id="expense-amount" placeholder="Amount">
+                    <select id="expense-category">
+                        <option value="">Select Category</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Food">Food</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <button onclick="addExpense()" class="btn primary">
+                        <i data-lucide="plus"></i>
+                        Add
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Expense History</h2>
+                <div id="expense-history" class="expense-list"></div>
+            </div>
+        </section>
+
+        <!-- Financial Advice Section -->
+        <section id="advice" class="section">
+            <h1>Financial Advice</h1>
+            <div class="advice-grid">
+                <div class="card">
+                    <h2>Financial Summary</h2>
+                    <div class="summary-list">
+                        <div class="summary-item">
+                            <span>Monthly Income</span>
+                            <span id="advice-income">$0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total Expenses</span>
+                            <span id="advice-expenses">$0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Monthly Savings</span>
+                            <span id="advice-savings">$0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Savings Rate</span>
+                            <span id="advice-rate">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Recommendations</h2>
+                    <div id="advice-recommendations" class="recommendations"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Financial Goals Calculator</h2>
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <h3>Emergency Fund</h3>
+                        <p id="emergency-fund-target">Target: $0</p>
+                        <p class="goal-note">6 months of income</p>
+                    </div>
+                    <div class="goal-card">
+                        <h3>Retirement Savings</h3>
+                        <p id="retirement-goal">Monthly Goal: $0</p>
+                        <p class="goal-note">15% of monthly income</p>
+                    </div>
+                    <div class="goal-card">
+                        <h3>Debt Payment</h3>
+                        <p id="debt-payment">Available: $0</p>
+                        <p class="goal-note">50% of savings</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Suggestions Section -->
+        <section id="investments" class="section">
+            <h1>Investment Suggestions</h1>
+            <div class="card warning-card">
+                <i data-lucide="alert-circle"></i>
+                <p>This is general advice. Please consult with a financial advisor for personalized recommendations.</p>
+            </div>
+
+            <div class="investment-grid">
+                <div class="card">
+                    <h2>Monthly Investment Capacity</h2>
+                    <div class="investment-capacity">
+                        <div class="capacity-amount">
+                            <span>Available for Investment</span>
+                            <span id="investment-amount">$0</span>
+                        </div>
+                        <p class="capacity-note">Based on your current income and expenses</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Risk Profile</h2>
+                    <div class="risk-profile">
+                        <div class="profile-header">
+                            <i data-lucide="trending-up"></i>
+                            <span>Balanced Growth Strategy</span>
+                        </div>
+                        <p>Recommended for steady long-term wealth building with moderate risk tolerance</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Recommended Investment Portfolio</h2>
+                <div id="investment-options" class="investment-options"></div>
+            </div>
+
+            <div class="card">
+                <h2>Market Insights</h2>
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-header">
+                            <i data-lucide="trending-up"></i>
+                            <h3>Current Market Trends</h3>
+                        </div>
+                        <p>
+                            The market is showing strong potential in technology and renewable energy sectors.
+                            Consider allocating a portion of your investment to these growing industries.
+                        </p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-header">
+                            <i data-lucide="dollar-sign"></i>
+                            <h3>Investment Strategy</h3>
+                        </div>
+                        <p>
+                            Dollar-cost averaging is recommended for steady investment growth.
+                            Consider setting up automatic monthly investments based on the allocations above.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
